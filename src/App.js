@@ -61,7 +61,8 @@ function App() {
   };
 
   return (
-    <div className="App">
+  <div className="App">
+    <div className="weather-container">
       <h1>My Weather App</h1>
       <div className="search-section">
         <input
@@ -75,22 +76,22 @@ function App() {
       </div>
 
       <div className="weather-data">
-        {/* Conditional rendering for current weather data */}
         {weatherData && (
           <div className="weather-info">
             <h2>Current Weather for {weatherData.name}</h2>
+            <img src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`} alt="Weather icon" />
             <h3>{weatherData.weather[0].description}</h3>
             <h1>{weatherData.main.temp}°C</h1>
           </div>
         )}
 
-        {/* Conditional rendering for 5-day forecast data */}
         {forecastData && (
           <div className="forecast-info">
             <h2>5-Day Forecast for {forecastData.city.name}</h2>
             <ul>
               {forecastData.list.slice(0, 5).map((forecast, index) => (
                 <li key={index}>
+                  <img src={`https://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png`} alt="Weather icon" />
                   Date: {new Date(forecast.dt * 1000).toLocaleDateString()}, Temp: {forecast.main.temp}°C, {forecast.weather[0].description}
                 </li>
               ))}
@@ -99,7 +100,8 @@ function App() {
         )}
       </div>
     </div>
-  );
+  </div>
+);
 }
 
 export default App;
